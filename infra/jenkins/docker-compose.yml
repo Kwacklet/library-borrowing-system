@@ -1,0 +1,24 @@
+# infra/jenkins/docker-compose.yml - runs ONLY Jenkins.
+# Kept separate from the application so the pipeline never redeploys Jenkins.
+# Start it from THIS folder:  docker compose up -d --build
+
+name: jenkins
+
+services:
+  jenkins:
+    build: .
+    image: library/jenkins:local
+    container_name: jenkins
+    user: root                    # classroom/lab only: lets Jenkins use the Docker socket
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # lets the smoke test reach the app on your computer
+    ports:
+      - "8081:8080"               # Jenkins web UI at http://localhost:8081
+      - "50000:50000"             # port for Jenkins agents (not used yet, kept per template)
+    volumes:
+      - jenkins_home:/var/jenkins_home              # jobs, plugins, settings survive restarts
+      - /var/run/docker.sock:/var/run/docker.sock   # lets Jenkins control Docker Desktop
+
+volumes:
+  jenkins_home:

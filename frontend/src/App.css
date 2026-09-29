@@ -1,0 +1,59 @@
+/* App.css - simple, clean styling. */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f8;
+  color: #222;
+  margin: 0;
+}
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.build {
+  background: #1e3a8a;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+}
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+input {
+  padding: 6px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+th, td {
+  text-align: left;
+  padding: 6px;
+  border-bottom: 1px solid #ddd;
+}
+button {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.message {
+  background: #fff7d6;
+  padding: 8px 12px;
+  border-radius: 6px;
+}

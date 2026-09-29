@@ -1,0 +1,19 @@
+{
+  "name": "books-api",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --env-file=../.env src/server.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.22.3",
+    "pg": "^8.23.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.3.0"
+  }
+}
