@@ -1,0 +1,3 @@
+# Store every text file with Linux line endings (LF).
+# Prevents Windows CRLF line endings from breaking files inside Linux containers.
+* text=auto eol=lf

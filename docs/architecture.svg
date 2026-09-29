@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1060" viewBox="0 0 1600 1060" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+<marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/></marker>
+</defs>
+<rect width="1600" height="1060" fill="#ffffff"/>
+<text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">Library Borrowing System — Container Architecture</text>
+<text x="40" y="76" font-size="15" fill="#475569">3 application modules + PostgreSQL + Nginx reverse proxy (one Compose stack) · Jenkins CI/CD (separate Compose stack)</text>
+<rect x="290" y="100" width="1280" height="930" rx="14" fill="#fafafa" stroke="#0f172a" stroke-width="2" stroke-dasharray="0"/>
+<text x="306" y="124" font-size="15" font-weight="700" fill="#0f172a">Presentation laptop · Docker Desktop (WSL 2)</text>
+<rect x="315" y="140" width="1230" height="500" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2" stroke-dasharray="8 6"/>
+<text x="331" y="164" font-size="15" font-weight="700" fill="#2563eb">Compose project: library   (docker-compose.yml in project root)</text>
+<rect x="335" y="178" width="990" height="442" rx="14" fill="none" stroke="#0891b2" stroke-width="2" stroke-dasharray="5 5"/>
+<text x="351" y="202" font-size="15" font-weight="700" fill="#0891b2">Network: app-network (user-defined bridge) · containers reach each other by service name</text>
+<rect x="370" y="330" width="230" height="120" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+<text x="485.0" y="358" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">proxy</text>
+<text x="485.0" y="380" font-size="14" fill="#334155" text-anchor="middle">Nginx (non-root)</text>
+<text x="485.0" y="400" font-size="14" fill="#334155" text-anchor="middle">container port 8080</text>
+<text x="485.0" y="420" font-size="14" fill="#334155" text-anchor="middle">single public entry</text>
+<rect x="372" y="300" width="160.4" height="24" rx="12" fill="#ea580c"/>
+<text x="452.2" y="317" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">published 8080:8080</text>
+<rect x="740" y="205" width="250" height="95" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+<text x="865.0" y="233" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">frontend</text>
+<text x="865.0" y="255" font-size="14" fill="#334155" text-anchor="middle">React build served by Nginx</text>
+<text x="865.0" y="275" font-size="14" fill="#334155" text-anchor="middle">internal :8080</text>
+<rect x="740" y="345" width="250" height="95" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+<text x="865.0" y="373" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">books-api</text>
+<text x="865.0" y="395" font-size="14" fill="#334155" text-anchor="middle">Node.js + Express</text>
+<text x="865.0" y="415" font-size="14" fill="#334155" text-anchor="middle">internal :3001 · GET /health</text>
+<rect x="740" y="485" width="250" height="95" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+<text x="865.0" y="513" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">borrowing-api</text>
+<text x="865.0" y="535" font-size="14" fill="#334155" text-anchor="middle">Node.js + Express</text>
+<text x="865.0" y="555" font-size="14" fill="#334155" text-anchor="middle">internal :3002 · GET /health</text>
+<rect x="1075" y="405" width="225" height="110" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+<text x="1187.5" y="433" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">postgres</text>
+<text x="1187.5" y="455" font-size="14" fill="#334155" text-anchor="middle">PostgreSQL 16 (alpine)</text>
+<text x="1187.5" y="475" font-size="14" fill="#334155" text-anchor="middle">internal :5432</text>
+<text x="1187.5" y="495" font-size="14" fill="#334155" text-anchor="middle">NOT published</text>
+<path d="M1370,410 v100 a75.0,10 0 0 0 150,0 v-100" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<ellipse cx="1445.0" cy="410" rx="75.0" ry="10" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+<text x="1445.0" y="468.0" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">pgdata</text>
+<text x="1445.0" y="486.0" font-size="12" fill="#475569" text-anchor="middle">named volume</text>
+<path d="M600,360 L680,360 L680,252 L738,252" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="700" y="244" font-size="13" fill="#334155" text-anchor="middle" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="4">/</text>
+<path d="M600,390 L738,390" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="668" y="381" font-size="13" fill="#334155" text-anchor="middle" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="4">/api/books…</text>
+<path d="M600,420 L680,420 L680,532 L738,532" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="612" y="555" font-size="13" fill="#334155" text-anchor="start" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="4">/api/borrowings…</text>
+<path d="M990,392 L1030,392 L1030,440 L1073,440" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#ar)"/>
+<path d="M990,532 L1030,532 L1030,480 L1073,480" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="1040" y="570" font-size="13" fill="#334155" text-anchor="middle" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="4">SQL :5432</text>
+<path d="M1300,460 L1368,460" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="1445" y="545" font-size="12" fill="#475569" text-anchor="middle">/var/lib/postgresql/data</text>
+<text x="1445" y="562" font-size="12" fill="#475569" text-anchor="middle">survives redeploys</text>
+<rect x="315" y="670" width="650" height="340" rx="14" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2" stroke-dasharray="8 6"/>
+<text x="331" y="694" font-size="15" font-weight="700" fill="#7c3aed">Compose project: jenkins</text>
+<text x="950" y="694" font-size="13" fill="#7c3aed" text-anchor="end">infra/jenkins/docker-compose.yml</text>
+<rect x="345" y="745" width="280" height="130" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+<text x="485.0" y="773" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">jenkins</text>
+<text x="485.0" y="795" font-size="14" fill="#334155" text-anchor="middle">Jenkins LTS + Docker CLI</text>
+<text x="485.0" y="815" font-size="14" fill="#334155" text-anchor="middle">container :8080</text>
+<text x="485.0" y="835" font-size="14" fill="#334155" text-anchor="middle">runs the Jenkinsfile</text>
+<rect x="347" y="712" width="160.4" height="24" rx="12" fill="#ea580c"/>
+<text x="427.2" y="729" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">published 8081:8080</text>
+<path d="M700,810 v85 a100.0,10 0 0 0 200,0 v-85" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<ellipse cx="800.0" cy="810" rx="100.0" ry="10" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+<text x="800.0" y="860.5" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">jenkins_home</text>
+<text x="800.0" y="878.5" font-size="12" fill="#475569" text-anchor="middle">named volume (jobs, plugins, creds)</text>
+<path d="M625,850 L698,850" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="345" y="900" font-size="14" font-weight="700" fill="#7c3aed">Pipeline:</text>
+<text x="345" y="921" font-size="14" fill="#334155">Checkout → Test → Build Images → Deploy → Smoke Test</text>
+<text x="345" y="945" font-size="13" fill="#475569">Images tagged library/*:BUILD_NUMBER → rollback = redeploy an older tag</text>
+<text x="345" y="967" font-size="13" fill="#475569">Secrets: Jenkins credential "library-env" (Secret file), never in Git</text>
+<text x="345" y="989" font-size="13" fill="#475569">Failing test at Test stage → Build/Deploy skipped, old version keeps running</text>
+<rect x="1010" y="690" width="520" height="110" rx="10" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+<text x="1270.0" y="718" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">Docker Engine (Docker Desktop)</text>
+<text x="1270.0" y="740" font-size="14" fill="#334155" text-anchor="middle">reached through /var/run/docker.sock</text>
+<text x="1270.0" y="760" font-size="14" fill="#334155" text-anchor="middle">builds images · creates / replaces containers</text>
+<path d="M625,770 L1008,770" fill="none" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#arp)"/>
+<text x="816" y="760" font-size="13" fill="#7c3aed" text-anchor="middle" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="4">docker / docker compose via mounted docker.sock</text>
+<path d="M1270,690 L1270,642" fill="none" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#arp)"/>
+<text x="1282" y="672" font-size="13" fill="#7c3aed" text-anchor="start" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="4">deploys library stack</text>
+<path d="M585,745 L585,452" fill="none" stroke="#7c3aed" stroke-width="2.2" stroke-dasharray="7 5" marker-end="url(#arp)"/>
+<text x="595" y="600" font-size="13" fill="#7c3aed" text-anchor="start" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="4">smoke test via</text>
+<text x="595" y="617" font-size="13" fill="#7c3aed" text-anchor="start" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="4">host.docker.internal:8080</text>
+<rect x="1010" y="830" width="520" height="175" rx="10" fill="#fff" stroke="#cbd5e1"/>
+<text x="1026" y="856" font-size="15" font-weight="700" fill="#0f172a">Legend</text>
+<path d="M1026,880 h50" stroke="#334155" stroke-width="2.2" marker-end="url(#ar)"/><text x="1090" y="885" font-size="13" fill="#334155">application request / data flow</text>
+<path d="M1026,908 h50" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#arp)"/><text x="1090" y="913" font-size="13" fill="#334155">CI/CD control (Jenkins, webhook, deploy)</text>
+<rect x="1026" y="926" width="50" height="20" rx="10" fill="#ea580c"/><text x="1090" y="941" font-size="13" fill="#334155">port published to the laptop (host:container)</text>
+<ellipse cx="1051" cy="966" rx="25" ry="8" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/><text x="1090" y="971" font-size="13" fill="#334155">named Docker volume (persistent data)</text>
+<text x="1026" y="995" font-size="12" fill="#475569">Only proxy (8080) and Jenkins (8081) are reachable from outside Docker.</text>
+<rect x="40" y="150" width="210" height="90" rx="10" fill="#ffffff" stroke="#334155" stroke-width="2"/>
+<text x="145.0" y="178" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">Browser</text>
+<text x="145.0" y="200" font-size="14" fill="#334155" text-anchor="middle">http://localhost:8080</text>
+<path d="M250,195 L330,195 L330,390 L368,390" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="272" y="185" font-size="13" fill="#334155" text-anchor="middle" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="4">HTTP</text>
+<rect x="40" y="560" width="210" height="90" rx="10" fill="#ffffff" stroke="#334155" stroke-width="2"/>
+<text x="145.0" y="588" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">Developer</text>
+<text x="145.0" y="610" font-size="14" fill="#334155" text-anchor="middle">VS Code · git push</text>
+<text x="145.0" y="630" font-size="14" fill="#334155" text-anchor="middle">(PR merged to main)</text>
+<rect x="40" y="720" width="210" height="90" rx="10" fill="#ffffff" stroke="#334155" stroke-width="2"/>
+<text x="145.0" y="748" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">GitHub</text>
+<text x="145.0" y="770" font-size="14" fill="#334155" text-anchor="middle">library-borrowing-system</text>
+<text x="145.0" y="790" font-size="14" fill="#334155" text-anchor="middle">repository + webhook</text>
+<rect x="40" y="880" width="210" height="90" rx="10" fill="#ffffff" stroke="#334155" stroke-width="2"/>
+<text x="145.0" y="908" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">ngrok tunnel</text>
+<text x="145.0" y="930" font-size="14" fill="#334155" text-anchor="middle">public HTTPS URL</text>
+<text x="145.0" y="950" font-size="14" fill="#334155" text-anchor="middle">→ Jenkins localhost:8081</text>
+<path d="M145,650 L145,718" fill="none" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#arp)"/>
+<text x="160" y="690" font-size="13" fill="#7c3aed" text-anchor="start" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="4">push</text>
+<path d="M145,810 L145,878" fill="none" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#arp)"/>
+<text x="160" y="838" font-size="13" fill="#7c3aed" text-anchor="start" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="4">webhook</text>
+<text x="160" y="855" font-size="13" fill="#7c3aed" text-anchor="start" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="4">HTTPS POST</text>
+<path d="M250,925 L275,925 L275,850 L343,850" fill="none" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#arp)"/>
+<path d="M343,790 L262,790 L262,765 L252,765" fill="none" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#arp)"/>
+<text x="305" y="782" font-size="13" fill="#7c3aed" text-anchor="middle" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="4">git checkout</text>
+</svg>

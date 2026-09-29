@@ -1,0 +1,101 @@
+# docker-compose.yml - starts the WHOLE application with one command:
+#   docker compose up -d --build
+# Jenkins is NOT here. It has its own file in infra/jenkins/.
+
+name: library   # Compose project name (prefix for containers, network, volume)
+
+services:
+  # ---------- Database ----------
+  postgres:
+    build: ./db
+    image: library/db:${TAG:-dev}
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data   # named volume = data survives redeploys
+    networks:
+      - app-network
+    # NOTE: no "ports:" here, so the database is NOT reachable from outside Docker
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ---------- Books API ----------
+  books-api:
+    build:
+      context: ./books-api
+      target: production
+    image: library/books-api:${TAG:-dev}
+    restart: unless-stopped
+    environment:
+      PORT: 3001
+      DB_HOST: postgres          # service name = hostname on app-network
+      DB_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  # ---------- Borrowing API ----------
+  borrowing-api:
+    build:
+      context: ./borrowing-api
+      target: production
+    image: library/borrowing-api:${TAG:-dev}
+    restart: unless-stopped
+    environment:
+      PORT: 3002
+      DB_HOST: postgres
+      DB_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  # ---------- React frontend ----------
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        BUILD_NUMBER: ${TAG:-dev}   # shown on the page as "Build ..."
+    image: library/frontend:${TAG:-dev}
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  # ---------- Nginx reverse proxy (the ONLY public entry point) ----------
+  proxy:
+    build: ./proxy
+    image: library/proxy:${TAG:-dev}
+    restart: unless-stopped
+    ports:
+      - "8080:8080"     # host port 8080 -> container port 8080
+    depends_on:
+      frontend:
+        condition: service_healthy
+      books-api:
+        condition: service_healthy
+      borrowing-api:
+        condition: service_healthy
+    networks:
+      - app-network
+
+volumes:
+  pgdata:
+
+networks:
+  app-network:
+    driver: bridge

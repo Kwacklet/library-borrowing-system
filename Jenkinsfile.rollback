@@ -1,0 +1,47 @@
+// Jenkinsfile.rollback - OPTIONAL bonus job: redeploy an earlier image tag.
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'ROLLBACK_TAG', defaultValue: '', description: 'Build number to roll back to, e.g. 14')
+    }
+
+    environment {
+        APP_URL = 'http://host.docker.internal:8080'
+    }
+
+    stages {
+        stage('Check tag exists') {
+            steps {
+                sh 'test -n "$ROLLBACK_TAG"'
+                sh 'docker image inspect "library/frontend:$ROLLBACK_TAG" > /dev/null'
+            }
+        }
+
+        stage('Rollback') {
+            steps {
+                withCredentials([file(credentialsId: 'library-env', variable: 'ENV_FILE')]) {
+                    sh 'rm -f .env && cp "$ENV_FILE" .env'
+                }
+                // --no-build = use the OLD images that already exist, do not rebuild
+                sh 'TAG="$ROLLBACK_TAG" docker compose up -d --no-build --wait --wait-timeout 180'
+            }
+        }
+
+        stage('Smoke Test') {
+            steps {
+                sh '''
+                    curl -fsS --retry 10 --retry-delay 3 --retry-all-errors "$APP_URL/" > /dev/null
+                    curl -fsS "$APP_URL/api/books/health"
+                    curl -fsS "$APP_URL/api/borrowings/health"
+                '''
+            }
+        }
+    }
+
+    post {
+        success { echo "Rolled back to build ${params.ROLLBACK_TAG}." }
+        failure { echo "Rollback to build ${params.ROLLBACK_TAG} failed." }
+        always  { sh 'rm -f .env' }
+    }
+}
