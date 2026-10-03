@@ -145,5 +145,6 @@ Docker-in-Docker with TLS, or Kaniko.
 
 ## Workflow
 
-GitHub Issue -> feature branch -> commit -> push -> Pull Request -> review -> merge into `main`.
-Never commit `.env`, passwords, or `node_modules`.
+Using the app:   Browser ──► Nginx proxy ──► frontend / books-api / borrowing-api ──► PostgreSQL
+
+Changing code:   merge into main ──► Jenkins ──► Checkout ► Test ► Build Images ► Deploy ► Smoke Test
