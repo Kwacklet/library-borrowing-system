@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<defs>
+<marker id="k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+<marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/></marker>
+</defs>
+<rect width="1400" height="760" fill="#fff"/>
+<text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">Library Borrowing System — Architecture</text>
+<rect x="250" y="80" width="1110" height="400" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2" stroke-dasharray="8 6"/>
+<text x="270" y="108" font-size="16" font-weight="700" fill="#2563eb">Application stack · Docker Compose · network: app-network</text>
+<rect x="40" y="235" width="160" height="90" rx="10" fill="#fff" stroke="#334155" stroke-width="2"/>
+<text x="120.0" y="278.0" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">Browser</text>
+<text x="120.0" y="300.0" font-size="14" fill="#334155" text-anchor="middle">user</text>
+<rect x="300" y="235" width="190" height="90" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+<text x="395.0" y="278.0" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">proxy</text>
+<text x="395.0" y="300.0" font-size="14" fill="#334155" text-anchor="middle">Nginx :8080</text>
+<rect x="305" y="203" width="130" height="26" rx="13" fill="#ea580c"/>
+<text x="370.0" y="221" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">port 8080 open</text>
+<rect x="680" y="130" width="220" height="80" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+<text x="790.0" y="168.0" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">frontend</text>
+<text x="790.0" y="190.0" font-size="14" fill="#334155" text-anchor="middle">React :8080</text>
+<rect x="680" y="240" width="220" height="80" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+<text x="790.0" y="278.0" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">books-api</text>
+<text x="790.0" y="300.0" font-size="14" fill="#334155" text-anchor="middle">Express :3001</text>
+<rect x="680" y="350" width="220" height="80" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+<text x="790.0" y="388.0" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">borrowing-api</text>
+<text x="790.0" y="410.0" font-size="14" fill="#334155" text-anchor="middle">Express :3002</text>
+<rect x="990" y="235" width="190" height="90" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+<text x="1085.0" y="278.0" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">postgres</text>
+<text x="1085.0" y="300.0" font-size="14" fill="#334155" text-anchor="middle">PostgreSQL :5432</text>
+<path d="M1235,235 v90 a55.0,10 0 0 0 110,0 v-90" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<ellipse cx="1290.0" cy="235" rx="55.0" ry="10" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+<text x="1290.0" y="288.0" font-size="16" font-weight="700" fill="#0f172a" text-anchor="middle">pgdata</text>
+<text x="1290.0" y="307.0" font-size="13" fill="#475569" text-anchor="middle">volume</text>
+<path d="M200,280 L298,280" fill="none" stroke="#334155" stroke-width="2.4" marker-end="url(#k)"/>
+<path d="M490,255 L545,255 L545,170 L678,170" fill="none" stroke="#334155" stroke-width="2.4" marker-end="url(#k)"/>
+<text x="612" y="160" font-size="14" font-weight="600" fill="#334155" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="5">/</text>
+<path d="M490,280 L678,280" fill="none" stroke="#334155" stroke-width="2.4" marker-end="url(#k)"/>
+<text x="612" y="270" font-size="14" font-weight="600" fill="#334155" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="5">/api/books</text>
+<path d="M490,305 L545,305 L545,390 L678,390" fill="none" stroke="#334155" stroke-width="2.4" marker-end="url(#k)"/>
+<text x="612" y="380" font-size="14" font-weight="600" fill="#334155" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="5">/api/borrowings</text>
+<path d="M900,280 L988,270" fill="none" stroke="#334155" stroke-width="2.4" marker-end="url(#k)"/>
+<path d="M900,390 L945,390 L945,300 L988,300" fill="none" stroke="#334155" stroke-width="2.4" marker-end="url(#k)"/>
+<path d="M1180,280 L1233,280" fill="none" stroke="#334155" stroke-width="2.4" marker-end="url(#k)"/>
+<rect x="250" y="540" width="1110" height="180" rx="14" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2" stroke-dasharray="8 6"/>
+<text x="1340" y="568" font-size="16" font-weight="700" fill="#7c3aed" text-anchor="end">CI/CD · separate Docker Compose</text>
+<rect x="40" y="595" width="160" height="90" rx="10" fill="#fff" stroke="#334155" stroke-width="2"/>
+<text x="120.0" y="638.0" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">GitHub</text>
+<text x="120.0" y="660.0" font-size="14" fill="#334155" text-anchor="middle">push to main</text>
+<rect x="300" y="595" width="190" height="90" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+<text x="395.0" y="638.0" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">jenkins</text>
+<text x="395.0" y="660.0" font-size="14" fill="#334155" text-anchor="middle">Jenkins :8081</text>
+<path d="M560,600 v80 a75.0,10 0 0 0 150,0 v-80" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<ellipse cx="635.0" cy="600" rx="75.0" ry="10" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+<text x="635.0" y="648.0" font-size="16" font-weight="700" fill="#0f172a" text-anchor="middle">jenkins_home</text>
+<text x="635.0" y="667.0" font-size="13" fill="#475569" text-anchor="middle">volume</text>
+<path d="M200,640 L298,640" fill="none" stroke="#7c3aed" stroke-width="2.4" marker-end="url(#p)"/>
+<text x="249" y="628" font-size="14" font-weight="600" fill="#7c3aed" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="5">webhook</text>
+<text x="225" y="662" font-size="12" fill="#7c3aed" text-anchor="middle">ngrok</text>
+<path d="M490,640 L558,640" fill="none" stroke="#334155" stroke-width="2.4" marker-end="url(#k)"/>
+<text x="760" y="622" font-size="15" font-weight="700" fill="#7c3aed">Pipeline</text>
+<text x="760" y="648" font-size="15" fill="#334155">Checkout → Test → Build Images → Deploy → Smoke Test</text>
+<text x="760" y="674" font-size="13" fill="#475569">A failed test stops the pipeline; the old version keeps running.</text>
+<path d="M395,595 L395,482" fill="none" stroke="#7c3aed" stroke-width="2.4" marker-end="url(#p)"/>
+<text x="407" y="520" font-size="14" font-weight="600" fill="#7c3aed" text-anchor="start" paint-order="stroke" stroke="#fff" stroke-width="5">builds and deploys</text>
+</svg>

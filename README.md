@@ -5,7 +5,14 @@ infrastructure with automated CI/CD** for the System Architecture and
 Integration final project. Every part runs in Docker, and every push to `main`
 is automatically tested, built, deployed, and smoke-tested by Jenkins.
 
-![Architecture](docs/architecture.png)
+## Architecture
+
+![Library Borrowing System architecture](docs/architecture-simple.svg)
+
+Every request enters through the Nginx proxy on port 8080, which routes it to the
+frontend or to one of the two APIs. Both APIs store data in PostgreSQL, which keeps
+it in the `pgdata` volume. Jenkins runs in a separate Compose stack and deploys the
+application whenever code is merged into `main`.
 
 ## Modules
 
