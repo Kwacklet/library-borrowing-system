@@ -7,7 +7,7 @@ is automatically tested, built, deployed, and smoke-tested by Jenkins.
 
 ## Architecture
 
-![Library Borrowing System architecture](docs/architecture-simple.svg)
+![Library Borrowing System architecture](docs/architecture-pipeline.png)
 
 Every request enters through the Nginx proxy on port 8080, which routes it to the
 frontend or to one of the two APIs. Both APIs store data in PostgreSQL, which keeps
