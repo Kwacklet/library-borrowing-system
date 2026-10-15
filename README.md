@@ -107,6 +107,8 @@ Start Jenkins (separate stack, so the pipeline never redeploys Jenkins itself):
 Open http://localhost:8081, install the suggested plugins plus **Docker Pipeline**,
 and add a **Secret file** credential with ID `library-env` containing the `.env`.
 
+> **Lab credentials:** Default admin user is `admin` (password: `admin123`).
+
 Pipeline (`Jenkinsfile`):
 
 | Stage | What it does | If it fails |
