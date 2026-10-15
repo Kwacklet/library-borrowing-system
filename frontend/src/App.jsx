@@ -88,7 +88,7 @@ export default function App() {
   return (
     <div className="container">
       <header>
-        <h1>Library Borrowing System - Demo Demo</h1>
+        <h1>Library Borrowing System - Live Demo</h1>
         <span className="build">Version {VERSION} - Build {BUILD}</span>
       </header>
 
